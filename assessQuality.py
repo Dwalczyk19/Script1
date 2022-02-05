@@ -171,4 +171,4 @@ if __name__ == "__main__":
     Q5countstart, Q5count, Q5dict, Q5rLength = Q5.parse()
     Q5average = Q5.averageLength()
     
-    print(Q1average,"\n\n",Q2average,"\n\n",Q3average,"\n\n",Q4average,"\n\n",Q5average,sep="")
+    print(Q1average,Q2average,Q3average,Q4average,Q5average,sep="\n\n")
