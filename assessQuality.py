@@ -8,6 +8,8 @@ Created on Wed Feb  2 09:58:39 2022
 from matplotlib import pyplot as plt
 import numpy as np 
 import pandas as pandas
+import time
+
 
 #Frequency of each word and there usage 
 
@@ -20,6 +22,10 @@ class assessQuality(object):
         self.countI = dict()
         self.responseLength = dict()
         self.wordLength = dict()
+        self.totalOccurence = dict()
+        self.insideFreq = dict() #Nested dictionary
+        self.frequency = dict() #Final frequency dictionary
+        
 
         
         oFile = open(file,"r",encoding="utf-8")
@@ -145,30 +151,63 @@ class assessQuality(object):
         
         
         return self.wordLength
+               
+    def occurence(self): 
+        
+        
+        #SIMPLE PARSE OF FINAL DICTIONARY
+        #Ill make an alias to avoid any overlapping of dictionaries
+        
+        fin = []
+        for i in range(len(self.L)): 
+            words = self.L[i].split()
+            for items in words: 
+                temp = []
+                for char in items:
+                    string = ""
+                    if not char.isalpha(): 
+                        continue 
+                    else: 
+                        temp.append(char)
                 
+                string = "".join(temp)
+                if string == "" or len(string) == 1: 
+                    continue
+                else:
+                    fin.append(string)
                 
-            
+        
+        for items in fin: 
+            items = items.lower()
+            count = fin.count(items)
+            self.totalOccurence[items] = count
+
+        return self.totalOccurence
 
 if __name__ == "__main__": 
-        
+    
+
     Q1 = assessQuality("Q1Answers.txt")
-    Q1countstart, Q1count, Q1dict, Q1rLength = Q1.parse()
+    Q1countIStart, Q1count, Q1dict, Q1rLength = Q1.parse()
     Q1average = Q1.averageLength() 
     
     Q2 = assessQuality("Q2Answers.txt")
-    Q2countstart, Q2count, Q2dict, Q2rLength = Q2.parse()
+    Q2countIstart, Q2count, Q2dict, Q2rLength = Q2.parse()
     Q2average = Q2.averageLength()
     
     Q3 = assessQuality("Q3Answers.txt")
-    Q3countstart, Q3count, Q3dict, Q3rLength = Q3.parse()
+    Q3countIstart, Q3count, Q3dict, Q3rLength = Q3.parse()
     Q3average = Q3.averageLength()
     
     Q4 = assessQuality("Q4Answers.txt")
-    Q4countstart, Q4count, Q4dict, Q4rLength = Q4.parse()
+    Q4countIstart, Q4count, Q4dict, Q4rLength = Q4.parse()
     Q4average = Q4.averageLength()
     
     Q5 = assessQuality("Q5Answers.txt")
-    Q5countstart, Q5count, Q5dict, Q5rLength = Q5.parse()
+    Q5countIstart, Q5count, Q5dict, Q5rLength = Q5.parse()
     Q5average = Q5.averageLength()
     
-    print(Q1average,Q2average,Q3average,Q4average,Q5average,sep="\n\n")
+    #print(Q1countIStart,"\n")
+    #print(Q1average,"\n\n",Q2average,"\n\n",Q3average,"\n\n",Q4average,"\n\n",Q5average,sep="")
+    
+
