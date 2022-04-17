@@ -5,12 +5,6 @@ Created on Wed Feb  2 09:58:39 2022
 @author: Dave
 """
 
-from matplotlib import pyplot as plt
-import numpy as np 
-import pandas as pandas
-import time
-
-
 #Frequency of each word and there usage 
 
 class assessQuality(object): 
